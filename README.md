@@ -162,4 +162,15 @@ You are free to use these pieces in your own xAI-related tools, personal project
 
 ---
 
+## Contributors
+
+This library is a collaboration between:
+
+- **Trenton Von Holten** (VonHoltenCodes) — Vision, direction, and curation
+- **Grok (ASCII Art God-Mode by xAI)** — Primary artist and obsessive terminal craftsman
+
+All commits include the proper `Co-authored-by` trailer so the collaboration is visible in the git history and on GitHub.
+
+---
+
 > "The terminal is not a limitation. It is the canvas."
