@@ -79,6 +79,12 @@ case "${1:-list}" in
     grok|blackhole)
         show_style "grok-blackhole"
         ;;
+    accretion|disk|swirl)
+        show_style "accretion"
+        ;;
+    lensed|lensing)
+        show_style "lensed"
+        ;;
     *)
         echo "Unknown command: $1"
         list_styles
