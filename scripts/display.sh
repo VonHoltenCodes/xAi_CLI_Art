@@ -85,6 +85,12 @@ case "${1:-list}" in
     lensed|lensing)
         show_style "lensed"
         ;;
+    event-horizon|horizon|void)
+        show_style "event-horizon"
+        ;;
+    spiral|arms)
+        show_style "spiral"
+        ;;
     *)
         echo "Unknown command: $1"
         list_styles
