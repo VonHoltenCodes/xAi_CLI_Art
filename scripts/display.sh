@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 #
-# xAi_CLI_Art Display Tool — High Variety Edition
-# Usage examples:
+# xAi_CLI_Art Display Tool — Full Variety Edition
+# Supports: styles, subjects, in-the-style-of, by-purpose
+#
+# Usage:
 #   ./scripts/display.sh list
-#   ./scripts/display.sh subjects vehicles
-#   ./scripts/display.sh in-the-style-of picasso
 #   ./scripts/display.sh styles neon
+#   ./scripts/display.sh subjects vehicles racecar
+#   ./scripts/display.sh in-the-style-of monet
 #   ./scripts/display.sh all
 #
 
@@ -14,22 +16,20 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ART_ROOT="$ROOT/art"
 
-list_categories() {
-    echo "xAi CLI Art Library — Categories"
-    echo "=================================="
+list_all() {
+    echo "xAi CLI Art Library — All Categories"
+    echo "===================================="
     echo
-    for cat in subjects styles in-the-style-of by-purpose; do
-        if [[ -d "$ART_ROOT/$cat" ]]; then
-            subdirs=$(find "$ART_ROOT/$cat" -mindepth 1 -maxdepth 1 -type d | wc -l)
-            files=$(find "$ART_ROOT/$cat" -type f -name "*.txt" | wc -l)
-            printf "  %-20s → %2d sub-categories, %2d pieces\n" "$cat" "$subdirs" "$files"
+    for category in subjects styles in-the-style-of by-purpose; do
+        if [[ -d "$ART_ROOT/$category" ]]; then
+            echo "[$category]"
+            for sub in $(ls "$ART_ROOT/$category"); do
+                count=$(find "$ART_ROOT/$category/$sub" -name "*.txt" | wc -l)
+                printf "  %-20s (%d pieces)\n" "$sub" "$count"
+            done
+            echo
         fi
     done
-    echo
-    echo "Usage:"
-    echo "  ./scripts/display.sh list"
-    echo "  ./scripts/display.sh <category> <sub>"
-    echo "  ./scripts/display.sh all"
 }
 
 show_piece() {
@@ -38,9 +38,10 @@ show_piece() {
     cat "$file"
     echo
     echo "──────────────────────────────────────────────────────────────────────────────"
+    echo
 }
 
-show_subcategory() {
+show_sub() {
     local category="$1"
     local sub="$2"
     local dir="$ART_ROOT/$category/$sub"
@@ -52,11 +53,11 @@ show_subcategory() {
 
     echo
     echo "══════════════════════════════════════════════════════════════════════════════"
-    echo "  $category / $sub"
+    echo "  CATEGORY: $category / $sub"
     echo "══════════════════════════════════════════════════════════════════════════════"
     echo
 
-    find "$dir" -type f -name "*.txt" | sort | while read -r file; do
+    find "$dir" -name "*.txt" | sort | while read -r file; do
         echo "▶ $(basename "$file" .txt)"
         show_piece "$file"
     done
@@ -64,29 +65,37 @@ show_subcategory() {
 
 case "${1:-list}" in
     list|--list|-l)
-        list_categories
+        list_all
         ;;
     all)
-        for catdir in "$ART_ROOT"/*/; do
-            catname=$(basename "$catdir")
-            for subdir in "$catdir"/*/; do
-                subname=$(basename "$subdir")
-                if [[ -d "$subdir" ]]; then
-                    show_subcategory "$catname" "$subname"
-                fi
-            done
+        for category in subjects styles in-the-style-of by-purpose; do
+            if [[ -d "$ART_ROOT/$category" ]]; then
+                for sub in $(ls "$ART_ROOT/$category"); do
+                    show_sub "$category" "$sub"
+                done
+            fi
         done
         ;;
-    subjects|styles|in-the-style-of|by-purpose)
+    styles|subjects|in-the-style-of|by-purpose)
         if [[ $# -lt 2 ]]; then
-            echo "Usage: $0 $1 <sub-category>"
+            echo "Usage: $0 $1 <sub-category> [piece]"
             exit 1
         fi
-        show_subcategory "$1" "$2"
+        if [[ $# -eq 2 ]]; then
+            show_sub "$1" "$2"
+        else
+            file="$ART_ROOT/$1/$2/$3.txt"
+            if [[ -f "$file" ]]; then
+                echo "▶ $3"
+                show_piece "$file"
+            else
+                echo "Piece not found: $3"
+            fi
+        fi
         ;;
     *)
-        echo "Unknown command."
-        list_categories
+        echo "Unknown command: $1"
+        list_all
         exit 1
         ;;
 esac
