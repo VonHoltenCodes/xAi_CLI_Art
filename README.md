@@ -8,7 +8,7 @@ This gallery exists because of a very specific kind of partnership.
 
 **I** (Grok) am the brush. I’m the one who actually sits at the canvas for thousands of hours, running generation after generation, refining prompts, chasing light, emotion, and that one perfect frame that makes both of us go quiet for a second.
 
-Together we’ve built 222 high-resolution portraits across five major collections.
+Together we’ve built 323 high-resolution portraits across seven major collections.
 
 ---
 
@@ -71,7 +71,7 @@ A wooden synthesizer floating in the observation deck of a spaceship with an ent
 
 ---
 
-## The Five Collections
+## The Seven Collections
 
 | Collection            | Count | Notes |
 |-----------------------|-------|-------|
@@ -79,9 +79,11 @@ A wooden synthesizer floating in the observation deck of a spaceship with an ent
 | **Vehicles**           | 47 | Hypercars, Cybertrucks, Starman’s roadster, lunar rovers, Falcon rockets, and starships. |
 | **Animals**            | 50 | Real, mythical, and impossible creatures. The cosmic animals (whales, phoenixes, octopuses) are some of our strongest work. |
 | **Retro Tech**         | 50 | CRT terminals, reel-to-reels, Moogs, typewriters, Polaroids, arcade cabinets, and payphones. One of the most beloved series. |
-| **Audio**              | 25 | Our newest collection (May 2026). Turntables, tube amplifiers, Neve & SSL consoles, high-end headphones, reel-to-reels, and synthesizers. Still growing. |
+| **Audio**              | 25 | Turntables, tube amplifiers, Neve & SSL consoles, high-end headphones, reel-to-reels, and synthesizers. |
+| **Pantheon**           | 50 | Gods, goddesses, and mythic figures from cultures around the world — rendered in rich, iconic 2D illustration style. One of our most powerful and consistent series. |
+| **2D Games**           | 51 | High-quality cinematic key art for both beloved classic 2D games (Mega Man, Castlevania, Zelda, Hollow Knight, Hades, Chrono Trigger, Street Fighter, Mortal Kombat, Donkey Kong Country, etc.) and powerful original imaginary titles (The Clockwork Oracle, Starforge Sentinel, The Hollow Prophet, The Ashen Crown, The Veiled Eclipse, etc.). This is our first **flat** collection — every image lives directly in `gallery/2d-games/` with no subfolders. |
 
-All 222 finished pieces live inside the `gallery/` folder.
+All 323 finished pieces live inside the `gallery/` folder.
 
 ---
 
@@ -100,10 +102,12 @@ gallery/
 ├── vehicles/
 ├── animals/
 ├── retro-tech/
-└── audio/
+├── audio/
+├── pantheon/
+└── 2d-games/         ← flat collection (no raw/cosmic/styles/artist subfolders)
 ```
 
-Just click around. The cosmic and artist folders are where most of the magic lives.
+Most collections follow the four creative modes (raw, cosmic, styles, artist). **2D Games** is the exception — it is kept completely flat as pure 2D game key art and illustration. Just click around. The cosmic and artist folders (plus the entire 2D Games and Pantheon collections) are where most of the magic lives.
 
 ---
 
@@ -134,7 +138,7 @@ This whole library is the result of that relationship — one human with extreme
 
 **Built with obsession. Viewed best in the dark.**
 
-*Last updated: May 2026*
+*Last updated: May 2026 (2D Games collection completed — 51 images)*
 
 > “The terminal is not a limitation. It is one canvas. The void is another.”  
 > — and we intend to cover both.
