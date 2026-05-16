@@ -14,11 +14,20 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-ART_ROOT="$ROOT/art"
+ART_ROOT="$ROOT/experiments"
+TERMINAL_ART="$ROOT/terminal-art"
 
 list_all() {
     echo "xAi CLI Art Library — All Categories"
     echo "===================================="
+    echo
+    echo "[terminal-art]  (curated best pieces)"
+    for category in grok xai-cli; do
+        if [[ -d "$TERMINAL_ART/$category" ]]; then
+            count=$(find "$TERMINAL_ART/$category" -name "*.txt" | wc -l)
+            printf "  %-20s (%d pieces)\n" "$category" "$count"
+        fi
+    done
     echo
     for category in subjects styles in-the-style-of by-purpose; do
         if [[ -d "$ART_ROOT/$category" ]]; then
